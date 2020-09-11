@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body style="height: 100%; margin: 0">
+    <div id="container" style="height: 100%; background-color: #6b5e56;"></div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        var geoCoordMap = [
+            { name: "Guangzhou", value: [113.5107, 23.2196] },
+            { name: "Beijing", value: [116.23128, 40.22077], label: { normal: { position: 'top' } } },
+            { name: "Hongkong", value: [114.16546, 22.27534], label: { normal: { position: 'bottom' } } },
+            { name: 'London', value: [-0.130058, 51.508604], label: { normal: { position: 'left' } } },
+            { name: 'Copenhagen', value: [12.431735, 55.665973], label: { normal: { position: 'left' } } },
+            { name: 'Amsterdam', value: [4.89354, 52.370649] },
+            // { name: 'Saint-Petersburg', value: [] }
+            { name: 'Tel Aviv-Yafo', value: [32.083333, 34.8] },
+            { name: 'Seoul', value: [126.986407, 37.536804], label: { normal: { position: 'bottom' } } },
+            { name: 'Tokyo', value: [139.713657, 35.707004], label: { normal: { position: 'top' } } },
+            { name: 'New Delhi', value: [77.206503, 28.62928] },
+            { name: 'Singapore', value: [103.51, 1.17] },
+            { name: 'Jakarta', value: [106.870937, -6.240893] },
+            { name: 'San Francisco', value: [37.46, 122.26] },
+            { name: 'New York', value: [-73.97622, 40.757498] }
+        ];
+
+        var map = [
+            { name: "Tianjin", value: [117.210813, 39.14393] },
+            { name: "Heibei", value: [114.522082, 38.048958] },
+            { name: 'Shanxi', value: [112.550864, 37.890277] },
+            { name: 'Jilin', value: [125.3222, 43.816] },
+            { name: 'Jiangsu', value: [118.778074, 32.057236] },
+            { name: 'Yunnan', value: [102.714601, 24.882] },
+            { name: 'Neimenggu', value: [111.660351, 40.828319] },
+            { name: 'Xinjiang', value: [87.564988, 43.84038] },
+            { name: 'Sichuan', value: [104.0648, 30.57] }
+        ]
+
+        /* var convertData = function (data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var geoCoord = geoCoordMap[data[i].name];
+                if (geoCoord) {
+                    res.push({
+                        name: data[i].name,
+                        // value: geoCoord.concat(data[i].value)
+                    });
+                }
+            }
+            return res;
+        }; */
+
+        option = {
+            backgroundColor: '#5f544e',
+            color: ['#01b1fa'],
+            /* legend: {
+                orient: 'vertical',
+                top: 'bottom',
+                left: 'right',
+                data: ['maincity'],
+                textStyle: {
+                    color: '#fff'
+                }
+            }, */
+            geo: {
+                map: 'world',
+                itemStyle: {
+                    areaColor: '#908f97',
+                    borderWidth: 0
+                },
+                emphasis: {
+                    itemStyle: {
+                        areaColor: '#01b1fa'
+                    },
+                    label: {
+                        // 鼠标移动到区域上面，文字不会出现了
+                        show: false
+                    }
+                }
+            },
+            series: [
+                {
+                    // name: 'maincity',
+                    type: 'scatter',
+                    coordinateSystem: 'geo',
+                    rippleEffect: {
+                        brushType: 'fill'
+                    },
+                    // data: convertData([
+                    //     { name: "Guangzhou", value: 38 },
+                    //     { name: "Beijing", value: 79 },
+                    //     { name: "London", value: 2 }
+                    // ]),
+                    data: geoCoordMap,
+                    symbolSize: 4,
+                    label: {
+                        normal: {
+                            color: '#fff',
+                            show: true,
+                            position: 'right',
+                            fontWeight: 'bold',
+                            fontSize: 14,
+                            formatter: '{b}',
+                        },
+                    },
+                    // emphasis: {
+                    //     itemStyle: {
+                    //         borderColor: '#fff',
+                    //         borderWidth: 1
+                    //     }
+                    // }
+                    itemStyle: {
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    }
+                },
+                {
+                    type: 'scatter',
+                    coordinateSystem: 'geo',
+                    rippleEffect: {
+                        brushType: 'fill',
+                    },
+                    data: map,
+                    symbolSize: 4
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+</body>
+
+</html>
