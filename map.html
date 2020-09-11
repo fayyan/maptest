@@ -38,10 +38,10 @@
             { name: 'Shanxi', value: [112.550864, 37.890277] },
             { name: 'Jilin', value: [125.3222, 43.816] },
             { name: 'Jiangsu', value: [118.778074, 32.057236] },
-            { name: 'Yunnan', value: [102.714601, 24.882] },
+            /* { name: 'Yunnan', value: [102.714601, 24.882] },
             { name: 'Neimenggu', value: [111.660351, 40.828319] },
             { name: 'Xinjiang', value: [87.564988, 43.84038] },
-            { name: 'Sichuan', value: [104.0648, 30.57] }
+            { name: 'Sichuan', value: [104.0648, 30.57] } */
         ]
 
         /* var convertData = function (data) {
@@ -59,8 +59,8 @@
         }; */
 
         option = {
-            backgroundColor: '#5f544e',
-            color: ['#01b1fa'],
+            backgroundColor: '#0c0f11',
+            color: ['#fff'],
             /* legend: {
                 orient: 'vertical',
                 top: 'bottom',
@@ -73,18 +73,19 @@
             geo: {
                 map: 'world',
                 itemStyle: {
-                    areaColor: '#908f97',
-                    borderWidth: 0
+                    areaColor: '#6b6c6d',
+                    borderWidth: 1,
+                    borderColor: '#6b6c6d',
                 },
                 emphasis: {
                     itemStyle: {
-                        areaColor: '#01b1fa'
+                        areaColor: '#fdbd15'
                     },
                     label: {
                         // 鼠标移动到区域上面，文字不会出现了
                         show: false
                     }
-                }
+                },
             },
             series: [
                 {
@@ -103,8 +104,8 @@
                     symbolSize: 4,
                     label: {
                         normal: {
-                            color: '#fff',
-                            show: true,
+                            color: '#fdbd15',
+                            show: false,
                             position: 'right',
                             fontWeight: 'bold',
                             fontSize: 14,
@@ -117,11 +118,12 @@
                     //         borderWidth: 1
                     //     }
                     // }
-                    itemStyle: {
-                        borderColor: '#fff',
-                        borderWidth: 1
-                    }
+                    // itemStyle: {
+                    //     borderColor: '#fff',
+                    //     borderWidth: 1
+                    // }
                 },
+                // 没有名字的地方的显示效果
                 {
                     type: 'scatter',
                     coordinateSystem: 'geo',
@@ -129,7 +131,35 @@
                         brushType: 'fill',
                     },
                     data: map,
-                    symbolSize: 4
+                    symbolSize: 4,
+                },
+                {
+                    type: 'lines',
+                    symbol: 'rect',
+                    symbolSize: [4, 8],
+                    color: '#fdbd15',
+                    opacity: 1,
+                    label: {
+                        position: 'end',
+                        fontWeight: 'bold',
+                        fontSize: 14,
+                        formatter: '{b}',
+                        show: true,
+                        color: '#fdbd15',
+                        formatter: '{b}',
+                        align: 'left',
+                        padding: [0, 0, 0, 10]
+                    },
+                    lineStyle: {
+                        type: 'solid',
+                        color: '#fdbd15',
+                        opacity: 1
+                    },
+                    data: [
+                        { name: 'Yunnan', value: 20, coords: [[102.714601, 24.882], [102.714601, 34.882]] },
+                        { name: 'Neimenggu', value: 20, coords: [[111.660351, 40.828319], [111.660351, 50.828319]] },
+                        { name: 'Xinjiang', value: 20, coords: [[87.564988, 43.84038], [87.564988, 53.84038]] },
+                        { name: 'Sichuan', value: 20, coords: [[104.0648, 30.57], [104.0648, 40.57]] }]
                 }
             ]
         };
